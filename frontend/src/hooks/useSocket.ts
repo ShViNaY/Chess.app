@@ -1,10 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 
-const WS_URL =
-  typeof window !== "undefined" && window.location.protocol === "https:"
-    ? `wss://${window.location.host}`
-    : "ws://localhost:8080";
+const WS_URL = import.meta.env.VITE_BACKEND_URL.replace(/^http/, "ws");
 
 const RECONNECT_DELAY_MS = 2000;
 

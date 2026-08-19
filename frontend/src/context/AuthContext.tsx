@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import type { ReactNode } from "react";
 
-const BACKEND_URL = "http://localhost:8080/api/auth";
+const BACKEND_URL = `${import.meta.env.VITE_BACKEND_URL}/api/auth`;
 
 export interface User {
     id: string;

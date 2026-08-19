@@ -29,8 +29,8 @@ export const Profile = () => {
         }
 
         if (token && user) {
-            fetch("http://localhost:8080/api/auth/me/games", {
-                headers: { Authorization: `Bearer ${token}` }
+            fetch(`${import.meta.env.VITE_BACKEND_URL}/api/auth/me/games`, {            
+            headers: { Authorization: `Bearer ${token}` }
             })
                 .then(res => res.json())
                 .then(data => {
