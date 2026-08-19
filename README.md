@@ -1,219 +1,143 @@
-# ♟️ Project Chess — Real-Time Multiplayer Chess
+﻿# Chess.app
 
-A full-stack, real-time multiplayer chess platform built from scratch. Players can compete in rated matches, play with friends via private rooms, and track their Elo rating over time.
+A real-time multiplayer chess application built with React, Node.js, and WebSocket-driven gameplay.
 
-![Landing Page](./docs/landing.png)
+## Overview
+Chess.app is a browser-based chess platform for live matches, matchmaking, private rooms, account-based play, and rating tracking. The project combines a React frontend with a Node.js backend and a Prisma-managed SQLite database.
 
----
+## Live Demo
+Coming soon.
 
-## 🎮 Live Demo
+## Screenshots
 
-> *Coming soon — deployment in progress*
+### Landing page
+![Landing page](./docs/landing.png)
 
----
+### Login and registration
+![Login](./docs/login.png)
+![Register](./docs/register.png)
 
-## ✨ Features
+### Live game and chat
+![Live chat](./docs/livechat.png)
+![Game](./docs/game.png)
 
-| Feature | Details |
-|---|---|
-| ⚡ **Real-time gameplay** | WebSocket-based moves with instant board updates |
-| 🔍 **Matchmaking** | Auto-matchmaking queue by time control (Rapid / Blitz / Bullet) |
-| 🏠 **Private rooms** | Create a room, share a 4-letter code, play with a friend |
-| 📈 **Elo rating system** | Ratings update after every game (win/loss/draw) |
-| ⏱️ **Time controls** | Per-player countdown clocks — 10 min, 3 min, 1 min |
-| 💬 **In-game chat** | Real-time chat between players during a game |
-| 🔑 **Login & registration** | Secure sign-up and sign-in flows with JWT-based auth |
-| 🏳️ **Resign & draw** | Offer, accept, or reject draw; resign at any time |
-| 📜 **Move history** | Full game move log with piece notation |
-| 👤 **User profiles** | Account creation, game history, and rating tracking |
-| 🔒 **Security** | Rate limiting on auth routes, protected route guards, bcrypt passwords |
+## Key Features
+- Real-time chess gameplay with WebSocket updates
+- Matchmaking and private room support
+- Player login and registration flow
+- In-game live chat
+- Move history and board state tracking
+- Elo rating updates after game completion
+- User profile and recent game history
+- Resign and draw controls
 
----
-
-## 🛠️ Tech Stack
-
+## Tech Stack
 ### Frontend
-![React](https://img.shields.io/badge/React_19-20232A?style=flat&logo=react&logoColor=61DAFB)
-![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=flat&logo=typescript&logoColor=white)
-![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat&logo=vite&logoColor=white)
-![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS_v4-38B2AC?style=flat&logo=tailwind-css&logoColor=white)
-![chess.js](https://img.shields.io/badge/chess.js-000000?style=flat)
+- React
+- TypeScript
+- Vite
+- Tailwind CSS
+- chess.js
 
 ### Backend
-![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat&logo=nodedotjs&logoColor=white)
-![Express](https://img.shields.io/badge/Express_5-000000?style=flat&logo=express&logoColor=white)
-![WebSocket](https://img.shields.io/badge/WebSocket_(ws)-010101?style=flat)
-![Prisma](https://img.shields.io/badge/Prisma-2D3748?style=flat&logo=prisma&logoColor=white)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=flat&logo=postgresql&logoColor=white)
-![JWT](https://img.shields.io/badge/JWT-000000?style=flat&logo=jsonwebtokens&logoColor=white)
+- Node.js
+- Express
+- WebSocket (ws)
+- Prisma
+- SQLite
+- JWT authentication
 
----
-
-## 🏗️ Architecture
-
-```
-┌─────────────────────────────────┐
-│         React Frontend          │
-│  (Vite + TypeScript + Tailwind) │
-└────────────┬───────────┬────────┘
-             │ REST API  │ WebSocket
-             │ (auth)    │ (game events)
-             ▼           ▼
-┌─────────────────────────────────┐
-│       Node.js + Express 5       │
-│  ┌───────────┐ ┌─────────────┐  │
-│  │ AuthRouter│ │ GameManager │  │
-│  │  (HTTP)   │ │   (WS)      │  │
-│  └───────────┘ └──────┬──────┘  │
-└─────────────────────────────────┘
-                         │
-              ┌──────────▼──────────┐
-              │  PostgreSQL via     │
-              │  Prisma ORM         │
-              │  (users, games,     │
-              │   moves, ratings)   │
-              └─────────────────────┘
+## Simple Architecture
+```text
+Frontend (React + Vite)             Backend (Express + WebSocket)
+        |                                     |
+        | --- REST auth requests ----------> |
+        |                                     |
+        | --- game events / chat ----------> |
+        |                                     |
+        | <--- board + status updates ------ |
+        |                                     |
+        +------------------ Prisma --------------------+
+                           SQLite database
 ```
 
-**WebSocket message flow:**
-1. Client connects → sends `AUTH` (JWT token)
-2. Client sends `FIND_MATCH` → backend queues by time control
-3. When 2 players match → backend sends `INIT_GAME` to both → game begins
-4. Moves, chat, resign, draw offers all flow over the same WS connection
-
----
-
-## 🚀 Getting Started
-
-### Prerequisites
-- Node.js 18+
-- PostgreSQL database
-
-### 1. Clone the repository
-```bash
-git clone https://github.com/Sanjana23-is/chess-multiplayer.git
-cd chess-multiplayer
+## Project Structure
+```text
+Chess.app/
+├── backend1/
+│   ├── prisma/
+│   ├── src/
+│   ├── .env
+│   ├── package.json
+│   └── tsconfig.json
+├── docs/
+│   ├── landing.png
+│   ├── login.png
+│   ├── register.png
+│   ├── livechat.png
+│   └── game.png
+├── frontend/
+│   ├── public/
+│   ├── src/
+│   ├── package.json
+│   └── vite.config.*
+├── README.md
+├── package-lock.json
+└── .gitignore
 ```
 
-### 2. Set up the backend
+## Local Setup
+### 1. Install backend dependencies
 ```bash
 cd backend1
-
-# Install dependencies
 npm install
-
-# Set up environment variables
-cp .env.example .env
-# Edit .env and set DATABASE_URL and JWT_SECRET
-
-# Run Prisma migrations
-npx prisma migrate dev
-
-# Start the backend (port 8080)
-npx ts-node ./src/index.ts
 ```
 
-### 3. Set up the frontend
+### 2. Configure environment variables
+Create a `.env` file in `backend1/` with:
+```env
+JWT_SECRET=your-secret-key
+DATABASE_URL="file:./dev.db"
+```
+
+### 3. Run Prisma migrations
 ```bash
-cd frontend
+cd backend1
+npx prisma migrate dev
+```
 
-# Install dependencies
-npm install
-
-# Start the dev server (port 5173)
+### 4. Start the backend
+```bash
+cd backend1
 npm run dev
 ```
 
-### 4. Open the app
-Navigate to **http://localhost:5173**, register an account, and start playing!
+### 5. Install frontend dependencies
+```bash
+cd frontend
+npm install
+```
 
----
+### 6. Start the frontend
+```bash
+cd frontend
+npm run dev
+```
 
-### Environment Variables
+Open `http://localhost:5173` in the browser.
 
-Create `backend1/.env`:
+## Environment Variables
 ```env
-DATABASE_URL="postgresql://user:password@localhost:5432/chess"
-JWT_SECRET="your-secret-key-here"
+JWT_SECRET=your-secret-key
+DATABASE_URL="file:./dev.db"
 ```
 
----
+## Future Improvements
+- Add richer matchmaking filters and queue tuning
+- Improve game analytics and match history insights
+- Add reconnect handling and reconnect recovery for live sessions
+- Expand spectator and tournament features
+- Improve UI polish and accessibility
 
-## 📸 Screenshots
-
-### Landing Page
-![Landing Page](./docs/landing.png)
-
-### Authentication
-<p>
-  <img src="./docs/login.png" alt="Login" width="45%" />
-  <img src="./docs/register.png" alt="Register" width="45%" />
-</p>
-
-### Live Match Experience
-<p>
-  <img src="./docs/livechat.png" alt="Live Chat" width="45%" />
-  <img src="./docs/game.png" alt="Active Game" width="45%" />
-</p>
-
----
-
-## 🔐 Security Features
-
-- 🔑 **JWT authentication** — 7-day tokens signed with a secret key
-- 🔒 **Password hashing** — bcrypt with salt rounds
-- 🚦 **Rate limiting** — max 10 login attempts / 15 min, 5 registrations / hour per IP
-- 🛡️ **Protected routes** — unauthenticated users redirected to `/login`
-- 🚫 **Input validation** — required field checks on all endpoints
-
----
-
-## 📁 Project Structure
-
-```
-chess-multiplayer/
-├── frontend/               # React + Vite frontend
-│   └── src/
-│       ├── components/     # ChessBoard, ChessClock, ErrorBoundary, PrivateRoute
-│       ├── context/        # AuthContext
-│       ├── hooks/          # useSocket, useAudio
-│       └── screens/        # Landing, Game, Login, Register, Profile, NotFound
-│
-└── backend1/               # Node.js + Express backend
-    └── src/
-        ├── GameManager.ts  # WebSocket handler, matchmaking, room management
-        ├── Game.ts         # Game state, move validation, Elo calculation
-        ├── auth.ts         # JWT auth + REST endpoints
-        ├── messages.ts     # WebSocket message type constants
-        └── prisma/         # Database schema & migrations
-```
-
----
-
-## 🎯 How It Works
-
-### Matchmaking
-Players join a queue for their chosen time control. When two players are in the queue simultaneously, a game is created in the database and both receive an `INIT_GAME` message assigning them colors.
-
-### Elo Rating
-After each game, both players' ratings are updated using the standard Elo formula:
-```
-Expected = 1 / (1 + 10^((opponentRating - playerRating) / 400))
-NewRating = OldRating + K * (Actual - Expected)
-```
-K-factor: 32 (standard)
-
-### Move Validation
-All moves are validated server-side using `chess.js`. The backend maintains the authoritative game state — clients cannot submit illegal moves.
-
----
-
-## 🤝 Contributing
-
-Pull requests welcome! Please open an issue first for major changes.
-
----
-
-## 📄 License
-
-MIT
+## Author
+Vinay SH
