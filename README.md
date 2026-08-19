@@ -22,9 +22,10 @@ A full-stack, real-time multiplayer chess platform built from scratch. Players c
 | 📈 **Elo rating system** | Ratings update after every game (win/loss/draw) |
 | ⏱️ **Time controls** | Per-player countdown clocks — 10 min, 3 min, 1 min |
 | 💬 **In-game chat** | Real-time chat between players during a game |
+| 🔑 **Login & registration** | Secure sign-up and sign-in flows with JWT-based auth |
 | 🏳️ **Resign & draw** | Offer, accept, or reject draw; resign at any time |
 | 📜 **Move history** | Full game move log with piece notation |
-| 👤 **User profiles** | Account creation, JWT auth, game history |
+| 👤 **User profiles** | Account creation, game history, and rating tracking |
 | 🔒 **Security** | Rate limiting on auth routes, protected route guards, bcrypt passwords |
 
 ---
@@ -143,8 +144,17 @@ JWT_SECRET="your-secret-key-here"
 ### Landing Page
 ![Landing Page](./docs/landing.png)
 
-### Game Board
-![Active Game](./docs/game.png)
+### Authentication
+<p>
+  <img src="./docs/login.png" alt="Login" width="45%" />
+  <img src="./docs/register.png" alt="Register" width="45%" />
+</p>
+
+### Live Match Experience
+<p>
+  <img src="./docs/livechat.png" alt="Live Chat" width="45%" />
+  <img src="./docs/game.png" alt="Active Game" width="45%" />
+</p>
 
 ---
 
