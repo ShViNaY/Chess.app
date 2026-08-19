@@ -26,7 +26,7 @@ export const Landing = () => {
                     <div className="w-10 h-10 bg-[#4F7A5A] rounded-xl flex items-center justify-center shadow-[0_4px_14px_rgba(0,0,0,0.18)]">
                         <svg className="w-5 h-5 text-[#E8E5DC]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L9 7h6zM5 10l2-2 3 2v6H5zM14 10l3-2 2 2v6h-5zM5 18h14v3H5z" /></svg>
                     </div>
-                    <span className="text-2xl font-bold font-outfit tracking-tight text-[#E8E5DC]">Project Chess</span>
+                    <span className="text-2xl font-bold font-outfit tracking-tight text-[#E8E5DC]">Chess Arena</span>
                 </div>
 
                 <div className="flex items-center gap-4">

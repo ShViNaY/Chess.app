@@ -56,7 +56,7 @@ export const Register = () => {
                     <div className="w-8 h-8 bg-[#4F7A5A] rounded-lg flex items-center justify-center shadow-[0_4px_12px_rgba(0,0,0,0.18)]">
                         <svg className="w-4 h-4 text-[#E8E5DC]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L9 7h6zM5 10l2-2 3 2v6H5zM14 10l3-2 2 2v6h-5zM5 18h14v3H5z" /></svg>
                     </div>
-                    <span className="text-lg font-bold text-[#E8E5DC] tracking-tight">Project Chess</span>
+                    <span className="text-lg font-bold text-[#E8E5DC] tracking-tight">Chess Arena</span>
                 </div>
 
                 <h2 className="text-2xl font-bold text-[#E8E5DC] text-center mb-1.5 tracking-tight">
