@@ -65,6 +65,7 @@ const gameManager = new GameManager();
 
 const startServer = async () => {
   try {
+    console.log('Attempting to connect to database...');
     await prisma.$connect();
     console.log('Database connection successful');
 
@@ -74,7 +75,12 @@ const startServer = async () => {
       gameManager.addUser(ws);
     });
   } catch (error) {
-    console.error('Failed to connect to database. Check DATABASE_URL and Prisma setup.', error);
+    console.error('Failed to connect to database:', error);
+    console.error('DATABASE_URL is set:', !!process.env.DATABASE_URL);
+    console.error('Check that:');
+    console.error('  1. DATABASE_URL includes ?sslmode=require');
+    console.error('  2. Credentials are correct');
+    console.error('  3. Prisma migrations have been run');
     process.exit(1);
   }
 };
