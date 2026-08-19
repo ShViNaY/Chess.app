@@ -10,9 +10,7 @@ Error: the URL must start with the protocol `postgresql://` or `postgres://`.
 
 ### Your Complete DATABASE_URL (use this exactly):
 ```
-postgresql://postgres.ntztedroppnvnlvihqzs:at4cez8tVTVDsqzG@aws-0-ap-northeast-1.pooler.supabase.com:5432/postgres?sslmode=require
-```
-
+DATABASE_URL="postgresql://postgres.PROJECT_REF:YOUR_PASSWORD@HOST:5432/postgres"
 ### Steps to Fix Render:
 
 1. **Go to Render Dashboard**
