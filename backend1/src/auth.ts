@@ -17,10 +17,15 @@ export const verifyToken = (token: string): string | null => {
     }
 };
 
+const normalizeEmail = (value: unknown): string => String(value ?? '').trim().toLowerCase();
+const normalizeName = (value: unknown): string => String(value ?? '').trim();
+
 // Register
 authRouter.post('/register', async (req: Request, res: Response) => {
     try {
-        const { email, name, password } = req.body;
+        const email = normalizeEmail(req.body?.email);
+        const name = normalizeName(req.body?.name);
+        const password = String(req.body?.password ?? '');
 
         if (!email || !name || !password) {
             res.status(400).json({ error: "Missing required fields" });
@@ -54,7 +59,8 @@ authRouter.post('/register', async (req: Request, res: Response) => {
 // Login
 authRouter.post('/login', async (req: Request, res: Response) => {
     try {
-        const { email, password } = req.body;
+        const email = normalizeEmail(req.body?.email);
+        const password = String(req.body?.password ?? '');
 
         if (!email || !password) {
             res.status(400).json({ error: "Missing required fields" });

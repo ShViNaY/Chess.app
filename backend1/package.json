@@ -2,8 +2,8 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "build:scripts": "tsc -p tsconfig.scripts.json",
-    "start": "node dist/index.js",
-    "dev": "npm run build && npm run build:scripts && node dist/index.js"
+    "start": "npx prisma generate && npx prisma migrate deploy && node dist/index.js",
+    "dev": "npm run build && npm run build:scripts && npx prisma generate && node dist/index.js"
   },
   "devDependencies": {
     "@types/bcrypt": "^6.0.0",

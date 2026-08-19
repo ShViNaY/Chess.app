@@ -5,17 +5,27 @@ import http from 'http';
 import cors from 'cors';
 import rateLimit from 'express-rate-limit';
 import { authRouter } from './auth';
+import { prisma } from './prisma';
 
-// ── Security: Warn loudly if JWT_SECRET is not set in the environment ──────────
+const requiredEnv = ['DATABASE_URL'];
+
+for (const key of requiredEnv) {
+  if (!process.env[key]) {
+    console.error(`Missing required environment variable: ${key}`);
+    process.exit(1);
+  }
+}
+
 if (!process.env.JWT_SECRET) {
   console.warn(
-    '\n⚠️  WARNING: JWT_SECRET environment variable is not set!\n' +
-    '   Using the insecure hardcoded fallback. Set JWT_SECRET in your .env file before deploying.\n'
+    '\n⚠️  WARNING: JWT_SECRET environment variable is not set.\n' +
+    '   Falling back to a dev-only default. Set JWT_SECRET in production before deploying.\n'
   );
 }
 
 const app = express();
 
+app.set('trust proxy', 1);
 app.use(cors());
 app.use(express.json());
 
@@ -49,13 +59,24 @@ app.get('/health', (req, res) => {
 
 const server = http.createServer(app);
 const wss = new WebSocketServer({ server });
-
 const PORT = Number(process.env.PORT || 8080);
-server.listen(PORT, () => console.log(`Server (HTTP+WS) started on port ${PORT}`));
 
 const gameManager = new GameManager();
 
-// Triggered whenever a new client connects
-wss.on('connection', function connection(ws) {
-  gameManager.addUser(ws);
-});
+const startServer = async () => {
+  try {
+    await prisma.$connect();
+    console.log('Database connection successful');
+
+    server.listen(PORT, () => console.log(`Server (HTTP+WS) started on port ${PORT}`));
+
+    wss.on('connection', function connection(ws) {
+      gameManager.addUser(ws);
+    });
+  } catch (error) {
+    console.error('Failed to connect to database. Check DATABASE_URL and Prisma setup.', error);
+    process.exit(1);
+  }
+};
+
+startServer();
