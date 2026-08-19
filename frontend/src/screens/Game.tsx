@@ -305,29 +305,25 @@ export const Game = () => {
       (chess.turn() === "b" && myColor === "black"));
 
   return (
-    <div className="relative min-h-screen w-full flex justify-center items-start text-neutral-900 dark:text-zinc-100 font-sans selection:bg-emerald-500/30 transition-colors duration-300 overflow-x-hidden">
+   <div className="relative min-h-screen w-full flex justify-center items-start text-[#E8E5DC] font-sans selection:bg-[#4F7A5A]/25 transition-colors duration-300 overflow-x-hidden">
 
-      {/* Abstract Background Blobs - Light Mode */}
-      <div className="dark:hidden absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] max-w-[800px] max-h-[800px] bg-blue-300/10 rounded-full blur-[120px] pointer-events-none z-0 mix-blend-multiply" />
-      <div className="dark:hidden absolute bottom-[-10%] right-[-10%] w-[60vw] h-[60vw] max-w-[900px] max-h-[900px] bg-rose-200/20 rounded-full blur-[150px] pointer-events-none z-0 mix-blend-multiply" />
+     {/* Abstract Background Blobs */}
+     <div className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] max-w-[800px] max-h-[800px] bg-[#4F7A5A]/8 rounded-full blur-[120px] pointer-events-none z-0 mix-blend-multiply" />
+     <div className="absolute bottom-[-10%] right-[-10%] w-[60vw] h-[60vw] max-w-[900px] max-h-[900px] bg-[#A6A59E]/8 rounded-full blur-[150px] pointer-events-none z-0 mix-blend-multiply" />
 
-      {/* Abstract Background Blobs - Dark Mode */}
-      <div className="hidden dark:block absolute top-[10%] left-[-5%] w-[40%] h-[50%] rounded-full bg-gradient-to-r from-cyan-900 to-blue-900 opacity-[0.1] blur-[100px] pointer-events-none z-0" />
-      <div className="hidden dark:block absolute bottom-[-10%] right-[-5%] w-[55%] h-[65%] rounded-full bg-gradient-to-l from-emerald-800 to-rose-900 opacity-[0.1] blur-[120px] pointer-events-none z-0" />
-
-      {/* Top Left Controls */}
-      <div className="absolute top-6 left-6 flex items-center gap-3 z-50">
-        <button
-          onClick={() => {
-            const isNowMuted = toggleMute();
-            setMutedUi(isNowMuted);
-          }}
-          className="p-3 bg-white hover:bg-neutral-50 dark:bg-white/5 dark:hover:bg-white/10 border border-neutral-200 dark:border-white/10 rounded-xl text-neutral-600 dark:text-gray-400 hover:text-neutral-900 dark:hover:text-white transition-colors flex items-center gap-2 font-bold text-sm shadow-sm"
-        >
-          <span>{mutedUi ? "🔇" : "🔊"}</span>
-          <span className="hidden sm:inline">{mutedUi ? "Muted" : "Sound On"}</span>
-        </button>
-      </div>
+     {/* Top Left Controls */}
+     <div className="absolute top-6 left-6 flex items-center gap-3 z-50">
+       <button
+         onClick={() => {
+           const isNowMuted = toggleMute();
+           setMutedUi(isNowMuted);
+         }}
+         className="p-3 bg-[#1D1E1C] hover:bg-[#242725] border border-[#2B2D29] rounded-xl text-[#A6A59E] hover:text-[#E8E5DC] transition-colors flex items-center gap-2 font-bold text-sm shadow-[0_4px_12px_rgba(0,0,0,0.12)]"
+       >
+         <span>{mutedUi ? "🔇" : "🔊"}</span>
+         <span className="hidden sm:inline">{mutedUi ? "Muted" : "Sound On"}</span>
+       </button>
+     </div>
 
 
 
@@ -349,20 +345,20 @@ export const Game = () => {
 
           {/* TURN INFO HEADER separated from the board */}
           {myColor && (
-            <div className="flex items-center justify-between bg-white/60 dark:bg-white/5 border border-white/50 dark:border-white/10 rounded-xl px-4 py-3 mb-3 backdrop-blur-xl dark:backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.04)] dark:shadow-none transition-all">
-              <div className="text-sm font-medium text-neutral-600 dark:text-gray-300">
-                You are <span className="font-bold text-neutral-900 dark:text-white capitalize">{myColor}</span>
+            <div className="flex items-center justify-between bg-[#1D1E1C] border border-[#2B2D29] rounded-xl px-4 py-3 mb-3 shadow-[0_8px_20px_rgba(0,0,0,0.12)] transition-all">
+              <div className="text-sm font-medium text-[#A6A59E]">
+                You are <span className="font-bold text-[#E8E5DC] capitalize">{myColor}</span>
               </div>
 
               <div className={`text-xs px-3 py-1.5 rounded-md font-bold uppercase tracking-wider ${gameResult
                 ? (gameResult.winner === myColor
-                  ? "bg-emerald-100 text-emerald-700 border border-emerald-300 dark:bg-emerald-500/10 dark:text-emerald-400 dark:border-emerald-500/20"
+                  ? "bg-[#2B3B2E] text-[#DCE7DE] border border-[#4F7A5A]"
                   : gameResult.result === "abandoned"
-                    ? "bg-orange-100 text-orange-700 border border-orange-300 dark:bg-orange-500/10 dark:text-orange-400 dark:border-orange-500/20"
+                    ? "bg-[#2B231D] text-[#D7B68A] border border-[#6B513C]"
                     : gameResult.result === "draw_agreed" || gameResult.result === "draw" || gameResult.result === "stalemate"
-                      ? "bg-blue-100 text-blue-700 border border-blue-300 dark:bg-blue-500/10 dark:text-blue-400 dark:border-blue-500/20"
-                      : "bg-red-100 text-red-700 border border-red-300 dark:bg-red-500/10 dark:text-red-400 dark:border-red-500/20")
-                : (isMyTurn ? "bg-emerald-100 text-emerald-700 border border-emerald-300 dark:bg-emerald-500/10 dark:text-emerald-400 dark:border-emerald-500/20" : "bg-neutral-100 text-neutral-500 border border-neutral-200 dark:bg-white/5 dark:text-gray-400 dark:border-white/5")
+                      ? "bg-[#272822] text-[#D8D6C8] border border-[#5A5F53]"
+                      : "bg-[#2D2120] text-[#D7B68A] border border-[#6A4742]")
+                : (isMyTurn ? "bg-[#2B3B2E] text-[#DCE7DE] border border-[#4F7A5A]" : "bg-[#1F211F] text-[#A6A59E] border border-[#2B2D29]")
                 }`}>
                 {gameResult ? (
                   gameResult.result === "abandoned" ? "⚠️ Opponent Left" :
@@ -389,7 +385,7 @@ export const Game = () => {
               </div>
             ))}
             {materialDiff > 0 && (
-              <span className="text-emerald-600 dark:text-emerald-400 font-bold ml-2 text-xs bg-emerald-100 dark:bg-emerald-500/10 border border-emerald-200 dark:border-transparent px-1.5 py-0.5 rounded shadow-sm">
+              <span className="text-[#DCE7DE] font-bold ml-2 text-xs bg-[#2B3B2E] border border-[#4F7A5A] px-1.5 py-0.5 rounded shadow-sm">
                 +{materialDiff}
               </span>
             )}
@@ -427,41 +423,41 @@ export const Game = () => {
 
               {/* Matchmaking / Waiting Overlay */}
               {!myColor && !gameResult && (
-                <div className="absolute inset-0 bg-white/90 dark:bg-black/80 backdrop-blur-sm flex flex-col items-center justify-center z-40 transition-colors">
+                <div className="absolute inset-0 bg-[#171817]/90 backdrop-blur-sm flex flex-col items-center justify-center z-40 transition-colors">
                   {roomError ? (
                     <div className="text-center animate-in fade-in zoom-in duration-300">
                       <div className="text-4xl mb-4">⚠️</div>
-                      <h3 className="text-xl font-bold text-red-600 dark:text-red-400 mb-2">Error</h3>
-                      <p className="text-neutral-600 dark:text-gray-400">{roomError}</p>
-                      <p className="text-sm text-neutral-500 dark:text-gray-500 mt-4">Returning to lobby...</p>
+                      <h3 className="text-xl font-bold text-[#D7B68A] mb-2">Error</h3>
+                      <p className="text-[#A6A59E]">{roomError}</p>
+                      <p className="text-sm text-[#777871] mt-4">Returning to lobby...</p>
                     </div>
                   ) : inviteCode ? (
                     <div className="text-center animate-in fade-in zoom-in duration-500">
-                      <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-emerald-100 dark:bg-emerald-500/10 flex items-center justify-center relative">
-                        <div className="absolute inset-0 rounded-full border border-emerald-300 dark:border-emerald-500/30 animate-ping"></div>
+                      <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-[#2B3B2E] flex items-center justify-center relative">
+                        <div className="absolute inset-0 rounded-full border border-[#4F7A5A] animate-ping"></div>
                         <div className="text-2xl">🔗</div>
                       </div>
-                      <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-2">Private Room Created</h3>
-                      <p className="text-neutral-600 dark:text-gray-400 text-sm mb-6">Share this code with your friend</p>
-                      <div className="bg-neutral-50 dark:bg-black/50 border border-neutral-200 dark:border-white/10 px-8 py-4 rounded-xl font-mono text-4xl text-emerald-600 dark:text-emerald-400 font-bold tracking-[0.2em] shadow-inner mb-6 mx-auto inline-block">
+                      <h3 className="text-xl font-bold text-[#E8E5DC] mb-2">Private Room Created</h3>
+                      <p className="text-[#A6A59E] text-sm mb-6">Share this code with your friend</p>
+                      <div className="bg-[#1D1E1C] border border-[#2B2D29] px-8 py-4 rounded-xl font-mono text-4xl text-[#DCE7DE] font-bold tracking-[0.2em] shadow-inner mb-6 mx-auto inline-block">
                         {inviteCode}
                       </div>
                       <div className="flex justify-center flex-col items-center">
                         <div className="flex h-1.5 w-1.5 relative mb-3">
-                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 dark:bg-emerald-400 opacity-75"></span>
-                          <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500 dark:bg-emerald-500"></span>
+                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#4F7A5A] opacity-75"></span>
+                          <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#5D8A67]"></span>
                         </div>
-                        <p className="text-xs text-neutral-500 dark:text-gray-500 uppercase tracking-widest font-semibold">Waiting for them to join...</p>
+                        <p className="text-xs text-[#777871] uppercase tracking-widest font-semibold">Waiting for them to join...</p>
                       </div>
                     </div>
                   ) : (
                     <div className="text-center animate-in fade-in zoom-in duration-500">
-                      <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-blue-100 dark:bg-blue-500/10 flex items-center justify-center relative">
-                        <div className="absolute inset-0 rounded-full border-t-2 border-blue-500 dark:border-blue-400 animate-spin"></div>
+                      <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-[#1F211F] flex items-center justify-center relative">
+                        <div className="absolute inset-0 rounded-full border-t-2 border-[#4F7A5A] animate-spin"></div>
                         <div className="text-2xl">🔍</div>
                       </div>
-                      <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-2">Finding Opponent</h3>
-                      <p className="text-neutral-600 dark:text-gray-400 text-sm max-w-[250px] mx-auto leading-relaxed">
+                      <h3 className="text-xl font-bold text-[#E8E5DC] mb-2">Finding Opponent</h3>
+                      <p className="text-[#A6A59E] text-sm max-w-[250px] mx-auto leading-relaxed">
                         Searching for a player seeking a match with the same time control...
                       </p>
                     </div>
@@ -472,7 +468,7 @@ export const Game = () => {
               {/* Game Over Modal Overlay */}
               {gameResult && (
                 <div className="absolute inset-0 bg-white/40 dark:bg-black/60 backdrop-blur-md flex flex-col items-center justify-center z-50 animate-in fade-in duration-300 transition-colors">
-                  <div className="bg-white/70 dark:bg-black/40 p-8 rounded-2xl border border-white/50 dark:border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.08)] dark:shadow-2xl flex flex-col items-center text-center max-w-[80%] backdrop-blur-xl dark:backdrop-blur-md">
+                  <div className="bg-[#1D1E1C] p-8 rounded-2xl border border-[#2B2D29] shadow-[0_8px_20px_rgba(0,0,0,0.12)] flex flex-col items-center text-center max-w-[80%] backdrop-blur-sm">
 
                     {/* Icon */}
                     <div className="text-5xl mb-4 drop-shadow-lg">
@@ -483,8 +479,8 @@ export const Game = () => {
                               "🤝"}
                     </div>
 
-                    <h2 className={`text-3xl font-black mb-2 tracking-tight ${gameResult.winner === myColor || gameResult.result === "abandoned" ? "text-emerald-600 dark:text-emerald-400" :
-                      gameResult.result === "draw" || gameResult.result === "draw_agreed" || gameResult.result === "stalemate" ? "text-blue-600 dark:text-blue-400" : "text-neutral-900 dark:text-white"
+                    <h2 className={`text-3xl font-black mb-2 tracking-tight ${gameResult.winner === myColor || gameResult.result === "abandoned" ? "text-[#DCE7DE]" :
+                      gameResult.result === "draw" || gameResult.result === "draw_agreed" || gameResult.result === "stalemate" ? "text-[#D8D6C8]" : "text-[#E8E5DC]"
                       }`}>
                       {gameResult.result === "abandoned" ? "You Won!" :
                         gameResult.result === "timeout" ? (gameResult.winner === myColor ? "You Won!" : "Time's Up!") :
@@ -494,7 +490,7 @@ export const Game = () => {
                     </h2>
 
                     {/* Subtitle */}
-                    <p className="text-neutral-500 dark:text-gray-400 text-sm mb-4">
+                    <p className="text-[#A6A59E] text-sm mb-4">
                       {gameResult.result === "checkmate" && gameResult.winner === myColor ? "Brilliant checkmate." :
                         gameResult.result === "checkmate" && gameResult.winner !== myColor ? "You were checkmated by the opponent." :
                           gameResult.result === "timeout" && gameResult.winner === myColor ? "Your opponent ran out of time." :
@@ -509,9 +505,9 @@ export const Game = () => {
                     {/* Rating Changes */}
                     {gameResult.newRating !== undefined && user && (
                       <div className="mb-8 flex items-center justify-center gap-3">
-                        <span className="text-neutral-500 dark:text-gray-500 font-bold uppercase text-xs tracking-widest">New Rating</span>
-                        <span className="text-2xl font-black text-neutral-900 dark:text-white">{gameResult.newRating}</span>
-                        <span className={`text-sm font-bold px-2 py-0.5 rounded-full border shadow-sm ${gameResult.newRating > user.rating ? "bg-emerald-50 border-emerald-200 text-emerald-600 dark:bg-emerald-500/20 dark:border-transparent dark:text-emerald-400" : gameResult.newRating < user.rating ? "bg-red-50 border-red-200 text-red-600 dark:bg-red-500/20 dark:border-transparent dark:text-red-400" : "bg-neutral-100 border-neutral-200 text-neutral-600 dark:bg-gray-500/20 dark:border-transparent dark:text-gray-400"}`}>
+                        <span className="text-[#777871] font-bold uppercase text-xs tracking-widest">New Rating</span>
+                        <span className="text-2xl font-black text-[#E8E5DC]">{gameResult.newRating}</span>
+                        <span className={`text-sm font-bold px-2 py-0.5 rounded-full border shadow-sm ${gameResult.newRating > user.rating ? "bg-[#2B3B2E] border-[#4F7A5A] text-[#DCE7DE]" : gameResult.newRating < user.rating ? "bg-[#2D2120] border-[#6A4742] text-[#D7B68A]" : "bg-[#1F211F] border-[#2B2D29] text-[#A6A59E]"}`}>
                           {gameResult.newRating > user.rating ? "+" : ""}{gameResult.newRating - user.rating}
                         </span>
                       </div>
@@ -524,7 +520,7 @@ export const Game = () => {
                       onClick={() => {
                         navigate("/");
                       }}
-                      className="group relative px-8 py-3 w-full font-bold text-white rounded-xl bg-emerald-600 hover:bg-emerald-500 dark:bg-gradient-to-br dark:from-emerald-500 dark:to-emerald-600 dark:hover:from-emerald-400 dark:hover:to-emerald-500 shadow-lg shadow-emerald-600/20 dark:shadow-[0_0_20px_rgba(16,185,129,0.3)] dark:hover:shadow-[0_0_25px_rgba(16,185,129,0.5)] transition-all transform hover:-translate-y-0.5 active:translate-y-0"
+                      className="group relative px-8 py-3 w-full font-bold text-[#E8E5DC] rounded-xl bg-[#4F7A5A] hover:bg-[#5D8A67] shadow-[0_4px_12px_rgba(0,0,0,0.18)] transition-colors"
                     >
                       Back to Lobby
                     </button>
@@ -536,10 +532,10 @@ export const Game = () => {
               {/* Draw Offer Modal */}
               {drawOfferReceived && (
                 <div className="absolute inset-0 bg-white/40 dark:bg-black/40 backdrop-blur-md flex items-center justify-center z-40 transition-colors">
-                  <div className="bg-white/70 dark:bg-[#1e2430] p-6 rounded-2xl border border-white/50 dark:border-blue-500/30 shadow-xl dark:shadow-2xl flex flex-col items-center text-center max-w-[80%] backdrop-blur-xl">
+                    <div className="bg-[#1D1E1C] p-6 rounded-2xl border border-[#2B2D29] shadow-[0_8px_20px_rgba(0,0,0,0.12)] flex flex-col items-center text-center max-w-[80%] backdrop-blur-sm">
                     <div className="text-3xl mb-3">🤝</div>
-                    <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-2">Draw Offered</h3>
-                    <p className="text-sm text-neutral-500 dark:text-gray-400 mb-6">Your opponent has offered a draw.</p>
+                    <h3 className="text-xl font-bold text-[#E8E5DC] mb-2">Draw Offered</h3>
+                    <p className="text-sm text-[#A6A59E] mb-6">Your opponent has offered a draw.</p>
 
                     <div className="flex gap-3 w-full">
                       <button
@@ -547,7 +543,7 @@ export const Game = () => {
                           socket.send(JSON.stringify({ type: REJECT_DRAW }));
                           setDrawOfferReceived(false);
                         }}
-                        className="flex-1 py-2 px-4 rounded-xl font-bold bg-white/50 hover:bg-white/80 text-neutral-700 dark:bg-white/5 dark:hover:bg-white/10 dark:text-white transition-colors border border-white/60 dark:border-white/10 shadow-sm"
+                        className="flex-1 py-2 px-4 rounded-xl font-bold bg-[#1F211F] hover:bg-[#242725] text-[#E8E5DC] transition-colors border border-[#2B2D29] shadow-sm"
                       >
                         Decline
                       </button>
@@ -556,7 +552,7 @@ export const Game = () => {
                           socket.send(JSON.stringify({ type: ACCEPT_DRAW }));
                           setDrawOfferReceived(false);
                         }}
-                        className="flex-1 py-2 px-4 rounded-xl font-bold bg-blue-50/70 hover:bg-blue-100/80 text-blue-700 dark:bg-blue-500/20 dark:hover:bg-blue-500/30 dark:text-blue-400 transition-colors border border-blue-200/50 dark:border-blue-500/30 shadow-sm"
+                        className="flex-1 py-2 px-4 rounded-xl font-bold bg-[#2B3B2E] hover:bg-[#334E3B] text-[#DCE7DE] transition-colors border border-[#4F7A5A] shadow-sm"
                       >
                         Accept
                       </button>
@@ -580,7 +576,7 @@ export const Game = () => {
               </div>
             ))}
             {materialDiff < 0 && (
-              <span className="text-emerald-600 dark:text-emerald-400 font-bold ml-2 text-xs bg-emerald-100 dark:bg-emerald-500/10 border border-emerald-200 dark:border-transparent px-1.5 py-0.5 rounded shadow-sm">
+              <span className="text-[#DCE7DE] font-bold ml-2 text-xs bg-[#2B3B2E] border border-[#4F7A5A] px-1.5 py-0.5 rounded shadow-sm">
                 +{Math.abs(materialDiff)}
               </span>
             )}
@@ -600,7 +596,7 @@ export const Game = () => {
 
           {/* Toast Notification for Rejected Draw */}
           {showDrawRejectedToast && (
-            <div className="fixed bottom-6 left-1/2 -translate-x-1/2 bg-red-100 dark:bg-red-500/10 border border-red-300 dark:border-red-500/20 text-red-600 dark:text-red-400 px-4 py-2 rounded-full text-sm font-bold shadow-lg backdrop-blur-md z-50 animate-in slide-in-from-bottom flex items-center gap-2">
+            <div className="fixed bottom-6 left-1/2 -translate-x-1/2 bg-[#2D2120] border border-[#6A4742] text-[#D7B68A] px-4 py-2 rounded-full text-sm font-bold shadow-lg z-50 animate-in slide-in-from-bottom flex items-center gap-2">
               <span>✕</span> Your draw offer was declined.
             </div>
           )}
@@ -630,11 +626,11 @@ export const Game = () => {
                         {i + 1}
                       </div>
 
-                      <div className={`flex-1 flex items-center py-1.5 px-3 font-mono font-medium ${isLatestWhite ? "bg-emerald-500/20 text-emerald-400 font-bold shadow-inner" : "text-neutral-300 dark:text-gray-300"}`}>
+                      <div className={`flex-1 flex items-center py-1.5 px-3 font-mono font-medium ${isLatestWhite ? "bg-[#2B3B2E] text-[#DCE7DE] font-bold shadow-inner" : "text-[#A6A59E]"}`}>
                         {whiteMove ? `${whiteMove.from} → ${whiteMove.to}` : ""}
                       </div>
 
-                      <div className={`flex-1 flex items-center py-1.5 px-3 font-mono font-medium border-l border-white/10 dark:border-white/5 border-dashed ${isLatestBlack ? "bg-emerald-500/20 text-emerald-400 font-bold shadow-inner" : "text-neutral-300 dark:text-gray-300"}`}>
+                      <div className={`flex-1 flex items-center py-1.5 px-3 font-mono font-medium border-l border-[#2B2D29] border-dashed ${isLatestBlack ? "bg-[#2B3B2E] text-[#DCE7DE] font-bold shadow-inner" : "text-[#A6A59E]"}`}>
                         {blackMove ? `${blackMove.from} → ${blackMove.to}` : ""}
                       </div>
                     </div>
@@ -657,7 +653,7 @@ export const Game = () => {
                 >
                   <span>💬</span> Open Chat
                   {unreadChatCount > 0 && (
-                    <span className="bg-emerald-500 text-white px-2 py-0.5 rounded-full text-xs normal-case tracking-normal">
+                    <span className="bg-[#4F7A5A] text-[#E8E5DC] px-2 py-0.5 rounded-full text-xs normal-case tracking-normal">
                       {unreadChatCount} new
                     </span>
                   )}
@@ -680,7 +676,7 @@ export const Game = () => {
                       chatMessages.map((msg, idx) => {
                         const isMe = msg.sender === myColor;
                         return (
-                          <div key={idx} className={`max-w-[85%] rounded-xl px-3 py-2 text-[13px] shadow-sm font-medium ${isMe ? 'bg-emerald-600 dark:bg-emerald-600 text-white self-end rounded-tr-sm' : 'bg-white/50 dark:bg-white/[0.05] text-neutral-800 dark:text-gray-200 self-start rounded-tl-sm border border-white/60 dark:border-white/5 backdrop-blur-md'}`}>
+                          <div key={idx} className={`max-w-[85%] rounded-xl px-3 py-2 text-[13px] shadow-sm font-medium ${isMe ? 'bg-[#4F7A5A] text-[#E8E5DC] self-end rounded-tr-sm' : 'bg-[#1F211F] text-[#E8E5DC] self-start rounded-tl-sm border border-[#2B2D29] backdrop-blur-sm'}`}>
                             {msg.text}
                           </div>
                         );
@@ -703,12 +699,12 @@ export const Game = () => {
                       value={chatInput}
                       onChange={(e) => setChatInput(e.target.value)}
                       placeholder="Type a message..."
-                      className="flex-1 bg-white/10 dark:bg-black/40 border border-white/20 dark:border-white/10 rounded-lg px-3 py-2 text-sm text-white dark:text-white placeholder-neutral-400 dark:placeholder-gray-500 focus:outline-none focus:border-emerald-500/50 transition-colors shadow-inner backdrop-blur-md"
+                      className="flex-1 bg-[#171817] border border-[#2B2D29] rounded-lg px-3 py-2 text-sm text-[#E8E5DC] placeholder-[#777871] focus:outline-none focus:border-[#4F7A5A] transition-colors shadow-inner"
                     />
                     <button
                       type="submit"
                       disabled={!chatInput.trim()}
-                      className="bg-emerald-600 hover:bg-emerald-500 disabled:opacity-50 disabled:hover:bg-emerald-600 text-white rounded-lg px-4 py-2 text-sm font-bold transition-colors shadow-sm"
+                      className="bg-[#4F7A5A] hover:bg-[#5D8A67] disabled:opacity-50 disabled:hover:bg-[#4F7A5A] text-[#E8E5DC] rounded-lg px-4 py-2 text-sm font-bold transition-colors shadow-sm"
                     >
                       Send
                     </button>
@@ -723,7 +719,7 @@ export const Game = () => {
                       socket.send(JSON.stringify({ type: RESIGN }));
                     }
                   }}
-                  className="flex-1 bg-white/5 hover:bg-white/10 dark:bg-white/5 dark:hover:bg-red-500/10 text-neutral-300 hover:text-red-400 dark:text-gray-400 dark:hover:text-red-400 border border-white/10 hover:border-red-300 dark:border-white/5 dark:hover:border-red-500/30 transition-all rounded-xl py-3 text-sm font-bold tracking-wider uppercase flex items-center justify-center gap-2 shadow-[0_4px_12px_rgba(0,0,0,0.1)] backdrop-blur-md"
+                  className="flex-1 bg-[#1F211F] hover:bg-[#242725] text-[#E8E5DC] hover:text-[#D7B68A] border border-[#2B2D29] hover:border-[#6A4742] transition-colors rounded-xl py-3 text-sm font-bold tracking-wider uppercase flex items-center justify-center gap-2 shadow-[0_4px_12px_rgba(0,0,0,0.1)]"
                 >
                   <span>🏳️</span> Resign
                 </button>
@@ -733,7 +729,7 @@ export const Game = () => {
                     socket.send(JSON.stringify({ type: OFFER_DRAW }));
                     alert("Draw offer sent to opponent.");
                   }}
-                  className="flex-1 bg-white/5 hover:bg-white/10 dark:bg-white/5 dark:hover:bg-blue-500/10 text-neutral-300 hover:text-blue-400 dark:text-gray-400 dark:hover:text-blue-400 border border-white/10 hover:border-blue-300 dark:border-white/5 dark:hover:border-blue-500/30 transition-all rounded-xl py-3 text-sm font-bold tracking-wider uppercase flex items-center justify-center gap-2 shadow-[0_4px_12px_rgba(0,0,0,0.1)] backdrop-blur-md"
+                  className="flex-1 bg-[#1F211F] hover:bg-[#242725] text-[#E8E5DC] hover:text-[#DCE7DE] border border-[#2B2D29] hover:border-[#4F7A5A] transition-colors rounded-xl py-3 text-sm font-bold tracking-wider uppercase flex items-center justify-center gap-2 shadow-[0_4px_12px_rgba(0,0,0,0.1)]"
                 >
                   <span>🤝</span> Offer Draw
                 </button>

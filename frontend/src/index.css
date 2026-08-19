@@ -8,12 +8,25 @@
 }
 
 @layer base {
+    :root {
+        --bg-page: #171817;
+        --bg-panel: #1D1E1C;
+        --bg-panel-alt: #20231F;
+        --bg-soft: #242725;
+        --text: #E8E5DC;
+        --text-soft: #A6A59E;
+        --text-muted: #777871;
+        --accent: #4F7A5A;
+        --accent-hover: #5D8A67;
+        --border: #2B2D29;
+        --board-light: #D8D6C8;
+        --board-dark: #607B4D;
+    }
+
     body {
-        background: radial-gradient(circle at 50% 40%,
-                #1C1F26 0%,
-                #14161B 45%,
-                #0E1014 100%);
-        color: #E5E7EB;
+        background: radial-gradient(circle at top left, rgba(79, 122, 90, 0.08), transparent 26%),
+            linear-gradient(180deg, #171817 0%, #171817 100%);
+        color: var(--text);
         font-family: var(--font-sans);
         min-height: 100vh;
     }
@@ -29,12 +42,12 @@
     }
 
     ::-webkit-scrollbar-thumb {
-        background: rgba(255, 255, 255, 0.1);
+        background: rgba(168, 165, 156, 0.24);
         border-radius: 99px;
     }
 
     ::-webkit-scrollbar-thumb:hover {
-        background: rgba(255, 255, 255, 0.2);
+        background: rgba(168, 165, 156, 0.38);
     }
 }
 
@@ -60,9 +73,9 @@
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus {
-    -webkit-text-fill-color: #ffffff;
-    -webkit-box-shadow: 0 0 0px 1000px #0D1017 inset;
-    box-shadow: 0 0 0px 1000px #0D1017 inset;
+    -webkit-text-fill-color: #E8E5DC;
+    -webkit-box-shadow: 0 0 0px 1000px #1D1E1C inset;
+    box-shadow: 0 0 0px 1000px #1D1E1C inset;
     transition: background-color 5000s ease-in-out 0s;
-    caret-color: #ffffff;
+    caret-color: #E8E5DC;
 }

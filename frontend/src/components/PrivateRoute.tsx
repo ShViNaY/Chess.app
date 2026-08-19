@@ -3,8 +3,8 @@ import { useAuth } from "../context/AuthContext";
 
 /** Spinner shown while auth state is resolving */
 const LoadingSpinner = () => (
-    <div className="min-h-screen flex items-center justify-center">
-        <div className="w-8 h-8 border-2 border-emerald-500/30 border-t-emerald-500 rounded-full animate-spin" />
+    <div className="min-h-screen flex items-center justify-center bg-[#171817]">
+        <div className="w-8 h-8 border-2 border-[#4F7A5A]/30 border-t-[#4F7A5A] rounded-full animate-spin" />
     </div>
 );
 

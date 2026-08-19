@@ -47,14 +47,14 @@ export const ChessClock = ({
     return (
         <div
             className={`
-        px-2 py-1 sm:px-4 sm:py-2 rounded-lg font-mono text-sm sm:text-xl font-bold transition-all duration-300 flex items-center shadow-sm dark:shadow-inner border backdrop-blur-md origin-right
-        ${isActive ? "bg-white/70 border-white/80 dark:bg-white/10 dark:border-transparent scale-105" : "bg-white/30 border-white/40 dark:bg-white/5 dark:border-transparent opacity-70"}
-        ${isLowTime && isActive ? "text-red-600 dark:text-red-400 animate-pulse bg-red-100/50 border-red-200/50 dark:bg-red-500/10 dark:border-transparent" : ""}
-        ${isZero ? "text-red-700 bg-red-200/50 border-red-300/50 dark:text-red-500 dark:bg-red-500/20 dark:border-transparent" : ""}
-        ${!isLowTime && !isZero ? (isActive ? "text-neutral-900 dark:text-white" : "text-neutral-500 dark:text-gray-300") : ""}
+        px-2 py-1 sm:px-4 sm:py-2 rounded-lg font-mono text-sm sm:text-xl font-bold transition-all duration-300 flex items-center border shadow-[0_4px_12px_rgba(0,0,0,0.10)] origin-right
+        ${isActive ? "bg-[#1D1E1C] border-[#2B2D29] scale-105" : "bg-[#171817] border-[#2B2D29] opacity-80"}
+        ${isLowTime && isActive ? "text-[#D7B68A] bg-[#241F1B] border-[#493E34]" : ""}
+        ${isZero ? "text-[#C9B18A] bg-[#211D1A] border-[#473B32]" : ""}
+        ${!isLowTime && !isZero ? (isActive ? "text-[#E8E5DC]" : "text-[#A6A59E]") : ""}
       `}
         >
-            <span className={`mr-1 sm:mr-2 text-[10px] sm:text-sm uppercase tracking-widest font-black ${isActive ? "text-neutral-400 dark:text-gray-500 opacity-100" : "opacity-50"}`}>{color}</span>
+            <span className={`mr-1 sm:mr-2 text-[10px] sm:text-sm uppercase tracking-widest font-black ${isActive ? "text-[#A6A59E] opacity-100" : "text-[#777871] opacity-70"}`}>{color}</span>
             {formatTime(displayTime)}
         </div>
     );
