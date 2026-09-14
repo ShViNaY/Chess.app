@@ -6,7 +6,7 @@ on:
     # This is strictly an occasional activity check (approx. 5 times per month).
     # It does NOT keep the Render service continuously awake and uses only ~1.25 hours
     # of the 750 free monthly instance hours, allowing the service to sleep normally.
-    - cron: '0 6 1,7,13,19,25 *'
+    - cron: '0 6 1,7,13,19,25 * *'
   workflow_dispatch:
 
 jobs:
