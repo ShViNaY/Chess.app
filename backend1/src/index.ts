@@ -54,7 +54,14 @@ app.use('/api/auth/register', registerLimiter);
 app.use('/api/auth', authRouter);
 
 app.get('/health', (req, res) => {
-  res.send('ok');
+  try {
+    res.status(200).json({
+      status: 'ok',
+      timestamp: new Date().toISOString(),
+    });
+  } catch {
+    res.status(500).json({ status: 'error' });
+  }
 });
 
 const server = http.createServer(app);

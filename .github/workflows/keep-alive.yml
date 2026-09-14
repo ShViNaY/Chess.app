@@ -1,0 +1,38 @@
+name: Periodic Backend Activity Check
+
+on:
+  schedule:
+    # Runs at 06:00 UTC on days 1, 7, 13, 19, and 25 of every month (~every 6 days).
+    # This is strictly an occasional activity check (approx. 5 times per month).
+    # It does NOT keep the Render service continuously awake and uses only ~1.25 hours
+    # of the 750 free monthly instance hours, allowing the service to sleep normally.
+    - cron: '0 6 1,7,13,19,25 *'
+  workflow_dispatch:
+
+jobs:
+  ping-health:
+    name: Ping Health Endpoint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send occasional health check request
+        run: |
+          BACKEND_URL="https://chess-app-backend-cy4h.onrender.com/health"
+          echo "=========================================="
+          echo "Periodic Activity Check to Production Backend"
+          echo "Target URL: $BACKEND_URL"
+          echo "=========================================="
+
+          # Request with a 60-second timeout to accommodate Render cold starts if sleeping
+          HTTP_STATUS=$(curl -s -S -o response.txt -w "%{http_code}" --max-time 60 "$BACKEND_URL")
+
+          echo "HTTP Status Code: $HTTP_STATUS"
+          echo "Response Body:"
+          cat response.txt
+          echo ""
+
+          if [ "$HTTP_STATUS" != "200" ]; then
+            echo "::error::Health check failed! Expected HTTP 200, got: $HTTP_STATUS"
+            exit 1
+          fi
+
+          echo "Periodic activity check completed successfully."
